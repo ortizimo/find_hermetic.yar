@@ -6,7 +6,8 @@ rule find_hermetic1
 	meta:
 		author = "Saulo 'Sal' Ortiz, Sr. Cyuber Forensics Analyst, ATG"
 		description = "Searches for Hermetic1 wiper used against Ukraine"
-		date = "2022-03-03"
+		reference = "https://github.com/ortizimo/find_hermetic.yar/blob/main/code"
+		date = "2022-03-03"		
 		version = "2.0"
 		in_the_wild = "True"
 						
