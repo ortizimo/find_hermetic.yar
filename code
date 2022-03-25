@@ -1,0 +1,24 @@
+import "hash"
+import "pe"
+
+rule find_hermetic1
+{					
+	meta:
+		author = "Saulo 'Sal' Ortiz, Sr. Cyuber Forensics Analyst, ATG"
+		description = "Searches for Hermetic1 wiper used against Ukraine"
+		date = "2022-03-03"
+		version = "2.0"
+		in_the_wild = "True"
+						
+	strings:
+		$a1 = {57 56 53 33 FF 8B 44} 								// .sample file HEX @ offset 0x400
+		$a2 = {48 73 28 73 AC 8C} 									// certificate HEX @ offset 0x10
+	 				
+	condition:
+		$a1 or $a2
+		or hash.md5(0, filesize) == "84ba0197920fd3e2b7dfa719fee09d2f" 				    // .sample file MD5
+		or hash.sha1(0, filesize) == "912342f1c840a42f6b74132f8a7c4ffe7d40fb77" 	// .sample file SHA1
+		
+		or hash.md5(0, filesize) == "94bc2ff3969d9775de508e1181318deb" 				    // certificate MD5
+		or hash.sha1(0, filesize) == "1ae7556dfacd47d9efbe79be974661a5a6d6d923" 	// certificate SHA1
+}
